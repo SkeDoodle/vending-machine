@@ -8,6 +8,14 @@ var find = function(coin, stack) {
 }
 
 /**
+ * 
+ * @param {number[]} coins 
+ */
+var coinsToMoney = function(coins) {
+  return coins.reduce((coin1, coin2) => coin1 + coin2, 0);
+}
+
+/**
  * @param {number[]} arr 
  */
 var hasDuplicates = function(arr) {
@@ -25,4 +33,4 @@ var hasDuplicates = function(arr) {
   return false;
 }
 
-module.exports = {find: find, hasDuplicates: hasDuplicates};
+module.exports = {find: find, hasDuplicates: hasDuplicates, coinsToMoney: coinsToMoney};
