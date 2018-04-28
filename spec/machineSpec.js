@@ -3,8 +3,13 @@ var Machine = require("./../src/machine");
 const AcceptedCoins = [1, 2, 4];
 
 describe("A machine", function() {
+  it("constructor should throw when an unaccepted coin is given", function() {
+    expect(new Machine(AcceptedCoins, [1, 4, 3, 5, 5])).toThrow();
+  });
+
   it("should add coin to its stack", function() {
     let machine = new Machine(AcceptedCoins, [1, 2, 2, 4]);
+    
     machine.addCoin(4);
     machine.addCoin(2);
 
@@ -28,6 +33,3 @@ describe("A machine", function() {
     expect(machine.containsCoin(5)).toBeFalsy();
   });
 });
-
-  
-

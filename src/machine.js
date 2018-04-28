@@ -5,17 +5,22 @@ const utils = require('./arrayUtils');
  * @param {number[]} acceptedCoins 
  */
 function Machine(acceptedCoins, currentPool) {
+  const refusedCoins = getRefusedCoins(currentPool, acceptedCoins);
+
+  if(refusedCoins.length > 0) {
+    throw(`Some coins were refused: [${refusedCoins}].`);
+  }
+
   if(utils.hasDuplicates(acceptedCoins)) {
     throw(`Accepted coins cannot have duplicates`);
   }
   
   this.acceptedCoins = acceptedCoins;
-  
   this.currentPool = currentPool;
 }
 
 Machine.prototype.addCoin = function (coin) {
-  if(utils.find(coin, this.acceptedCoins) == -1) {
+  if(!isCoinAccepted(coin, this.acceptedCoins)) {
     throw(`A coin of ${coin} value is not accepted`);
   }
 
@@ -37,3 +42,29 @@ Machine.prototype.containsCoin = function(coin) {
 }
 
 module.exports = Machine;
+
+/**
+ * 
+ * @param {number[]} coins 
+ * @param {number[]} acceptedCoins 
+ */
+function getRefusedCoins(coins, acceptedCoins) {
+  let refusedCoins = [];
+
+  coins.forEach(coin => {
+    if(!isCoinAccepted(coin, acceptedCoins)) {
+      refusedCoins.push(coin);
+    }
+  });
+
+  return refusedCoins;
+}
+
+/**
+ * 
+ * @param {number} coin 
+ * @param {number[]} acceptedCoins 
+ */
+function isCoinAccepted(coin, acceptedCoins) {
+  return utils.find(coin, acceptedCoins) != -1;
+}
