@@ -37,7 +37,7 @@ Machine.prototype.removeCoin = function(coin) {
   this.currentPool.splice(index, 1);
 }
 
-Machine.prototype.containsCoin = function(coin) {
+Machine.prototype.hasCoin = function(coin) {
   return utils.find(coin, this.currentPool) != -1;
 }
 

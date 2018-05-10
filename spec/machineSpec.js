@@ -29,7 +29,7 @@ describe("A machine", function() {
   it("should check if it contains a coin it its stack", function() {
     let machine = new Machine(AcceptedCoins, [1, 2, 2, 4]);
 
-    expect(machine.containsCoin(1)).toBeTruthy();
-    expect(machine.containsCoin(5)).toBeFalsy();
+    expect(machine.hasCoin(1)).toBeTruthy();
+    expect(machine.hasCoin(5)).toBeFalsy();
   });
 });
