@@ -13,7 +13,7 @@ describe("A machine", function() {
     machine.addCoin(4);
     machine.addCoin(2);
 
-    expect(machine.currentPool).toEqual([1, 2, 2, 4, 4, 2]);
+    expect(machine.bank).toEqual([1, 2, 2, 4, 4, 2]);
   });
 
   it("should remove coin from its stack if it can", function() {
@@ -22,7 +22,7 @@ describe("A machine", function() {
     machine.removeCoin(2);
     machine.removeCoin(4);
 
-    expect(machine.currentPool).toEqual([1, 2]);
+    expect(machine.bank).toEqual([1, 2]);
     expect(() => machine.removeCoin(5)).toThrow();
   });
 

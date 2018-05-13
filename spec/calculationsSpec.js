@@ -23,7 +23,7 @@ describe('Calculations', function () {
 
     expect(result).toEqual([.5, .1, .1, .05, .05]);
     expect(utils.coinsToMoney(result)).toEqual(change);
-    expect(machine.currentPool).toEqual([
+    expect(machine.bank).toEqual([
       5, 5, 5, 5, 5, 5, 5, 5,
       2, 2, 2, 2, 2, 2, 2,
       1, 1, 1, 1, 1, 1, 1,

@@ -1,11 +1,11 @@
 const utils = require('./arrayUtils');
 
 /**
- * @param {number[]} currentPool 
+ * @param {number[]} bank 
  * @param {number[]} acceptedCoins 
  */
-function Machine(acceptedCoins, currentPool) {
-  const refusedCoins = getRefusedCoins(currentPool, acceptedCoins);
+function Machine(acceptedCoins, bank) {
+  const refusedCoins = getRefusedCoins(bank, acceptedCoins);
 
   if(refusedCoins.length > 0) {
     throw(`Some coins were refused: [${refusedCoins}].`);
@@ -16,7 +16,7 @@ function Machine(acceptedCoins, currentPool) {
   }
   
   this.acceptedCoins = acceptedCoins;
-  this.currentPool = currentPool;
+  this.bank = bank;
 }
 
 Machine.prototype.addCoin = function (coin) {
@@ -24,21 +24,21 @@ Machine.prototype.addCoin = function (coin) {
     throw(`A coin of ${coin} value is not accepted`);
   }
 
-  this.currentPool.push(coin);
+  this.bank.push(coin);
 }
 
 Machine.prototype.removeCoin = function(coin) {
-  var index = utils.find(coin, this.currentPool);
+  var index = utils.find(coin, this.bank);
   
   if(index == -1) {
     throw(`No more coins ${coin} in the pool`);
   }
 
-  this.currentPool.splice(index, 1);
+  this.bank.splice(index, 1);
 }
 
 Machine.prototype.hasCoin = function(coin) {
-  return utils.find(coin, this.currentPool) != -1;
+  return utils.find(coin, this.bank) != -1;
 }
 
 module.exports = Machine;

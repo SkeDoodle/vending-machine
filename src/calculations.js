@@ -10,10 +10,10 @@ var change = [];
  */
 var calculateChange = function myself (machine, cashBack) {
 
-  const coin = machine.currentPool.find(coin => coin <= cashBack);
+  const coin = machine.bank.find(coin => coin <= cashBack);
   
   if(coin == undefined) {
-    throw ("Machine out of change");  
+    throw ("Machine out of change.");  
   }
 
   cashBack = (cashBack * 10 - coin * 10) / 10;
