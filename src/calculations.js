@@ -5,27 +5,27 @@ var change = [];
 /**
  * 
  * @param {Machine} machine 
- * @param {number} cashBack
- * @returns {number[]} 
+ * @param {number} amount
+ * @returns {number[]} change 
  */
-var calculateChange = function myself (machine, cashBack) {
+var calculateChange = function myself (machine, amount) {
 
-  const coin = machine.bank.find(coin => coin <= cashBack);
+  const coin = machine.bank.find(coin => coin <= amount);
   
   if(coin == undefined) {
     throw ("Machine out of change.");  
   }
 
-  cashBack = (cashBack * 10 - coin * 10) / 10;
+  amount = (amount * 10 - coin * 10) / 10;
 
   machine.removeCoin(coin);
   change.push(coin);
 
-  if(cashBack == 0) {
+  if(amount == 0) {
     return change;
   }
   
-  return myself(machine, cashBack);   
+  return myself(machine, amount);   
 }
 
 module.exports = { calculateChange };
